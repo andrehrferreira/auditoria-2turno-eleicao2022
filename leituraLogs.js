@@ -37,9 +37,11 @@ class LeituraLogs {
                     "logs": []
                 };
 
-                const archive = Seven.extractFull(file, unzipDir, {
-                    $progress: false
-                }); 
+                const archive = Seven.extractFull(file, unzipDir, { $progress: false }); 
+
+                archive.on('error', async () => {
+                    resolve();
+                });
 
                 archive.on('end', async () => {
                     const bufferISO = await fs.readFileSync(`${unzipDir}/logd.dat`, "latin1");
