@@ -1,0 +1,18 @@
+/node_modules
+linksBUs.json
+package-lock.json
+/Screenshots/*
+/.Screenshots/*
+/BUs/*
+/Binary/*
+/DataParsed/*
+relatorio.json
+/UrnasSemSerial/*
+*.zip
+*.rar
+/1 Turno/*
+/2 Turno/*
+/LogsParsed/**/*
+/DownloadLogs/downloads
+/tmp
+/DownloadLogs/data-source
