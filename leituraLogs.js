@@ -39,7 +39,8 @@ class LeituraLogs {
 
                 const archive = Seven.extractFull(file, unzipDir, { $progress: false }); 
 
-                archive.on('error', async () => {
+                archive.on('error', async (err) => {
+                    console.log(err);
                     resolve();
                 });
 
@@ -165,6 +166,7 @@ class LeituraLogs {
                 });
             }
             catch(e){
+                console.log(e);
                 resolve();
             }
         }); 
@@ -192,7 +194,7 @@ class LeituraLogs {
 }
 
 (async () => {
-    const files = await fg("./DownloadLogs/downloads/AC/*.logjez", { onlyFiles: true });
+    const files = await fg("./DownloadLogs/downloads/AL/*.logjez", { onlyFiles: true });
     const leituraLogs = new LeituraLogs();
 
     const bar1 = new cliProgress.SingleBar({}, cliProgress.Presets.shades_classic);
@@ -204,4 +206,6 @@ class LeituraLogs {
         try{ await leituraLogs.unzip(path.resolve(log)); }
         catch(e){}
     }
+
+    process.exit(1);
 })();

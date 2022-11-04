@@ -87,11 +87,17 @@ class BuildJson {
 
                     //
                     $url = strtolower("https://resultados.tse.jus.br/oficial/ele2022/arquivo-urna/407/dados/{$uf}/{$nubu}/{$zn}/{$se}/p000407-{$uf}-m{$nubu}-z{$zn}-s{$se}-aux.json");
-                    $aux = json_decode(file_get_contents($url));
+                    $result = file_get_contents($url);
+                    if (str_contains($result, "Access Denied"))
+                    {
+                        die("ACCESS DENIED: https://resultados.tse.jus.br/oficial/ele2022/arquivo-urna/407/dados/{$uf}/{$nubu}/{$zn}/{$se}/p000407-{$uf}-m{$nubu}-z{$zn}-s{$se}-aux.json");
+                    }
+
+                    $aux = json_decode($result);
                     $hash = $aux->hashes[0]->hash;
 
                     //
-                    $urlBu = "https://resultados.tse.jus.br/oficial/ele2022/arquivo-urna/407/dados/ac/{$nubu}/{$zn}/{$se}/{$hash}/o00407-{$nubu}{$zn}{$se}.logjez";
+                    $uf = strtolower($uf); $urlBu = "https://resultados.tse.jus.br/oficial/ele2022/arquivo-urna/407/dados/{$uf}/{$nubu}/{$zn}/{$se}/{$hash}/o00407-{$nubu}{$zn}{$se}.logjez";
 
                     $ch = curl_init();
                     curl_setopt($ch, CURLOPT_URL, $urlBu);
@@ -110,6 +116,11 @@ class BuildJson {
                         echo 'Error:' . curl_error($ch);
                     }
                     curl_close($ch);
+
+                    if (str_contains($result, "Access Denied"))
+                    {
+                        die("ACCESS DENIED: https://resultados.tse.jus.br/oficial/ele2022/arquivo-urna/407/dados/{$uf}/{$nubu}/{$zn}/{$se}/p000407-{$uf}-m{$nubu}-z{$zn}-s{$se}-aux.json");
+                    }
 
                     file_put_contents($targetFile, $result);
 
