@@ -3,6 +3,7 @@
   "dependencies": {
     "7z-extract": "^0.0.3",
     "archiver": "^5.3.1",
+    "argv": "^0.0.2",
     "cli-progress": "^3.11.2",
     "extract-zip": "^2.0.1",
     "fast-glob": "^3.2.12",
@@ -12,6 +13,8 @@
     "node-fetch": "^3.2.10",
     "node-zip": "^1.1.1",
     "puppeteer": "^18.2.0",
+    "sqlite": "^4.1.2",
+    "sqlite3": "^5.1.2",
     "unzip": "^0.1.11"
   }
 }
